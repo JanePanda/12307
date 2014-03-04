@@ -5,8 +5,10 @@ satisfied-trains = null
 amount-of-trains-in-a-batch-for-showing = 50
 is-shown-trains-updating = false # 页面上的trains列表，在一次更新未完成前，不能够再更新，以免用户多次操作后，一下显示全部trains（特别是滚动）
 
-angular.module('12307App').controller 'TrainsCtrl', ($scope, $location, $timeout, Tickets, Trains, Remain-tickets, Order) ->
+angular.module('12307App').controller 'TrainsCtrl',($scope, $location, $timeout, Tickets, Trains, Remain-tickets, Order ,Date) ->
   
+  $scope.dateListItems = Date.getDateListItems!
+  console.log $scope.dateListItems
   Trains.then (promise)-> # 获取车次和余票数据
     update-scope-trains Tickets, promise.data, $scope, $timeout, ->
       $scope.condition = {}
@@ -127,3 +129,4 @@ initial-scroll-show-more-listener = ($scope)!->
   $ window .scroll !->
     if document.document-element.client-height + $(document).scroll-top() >= document.body.offset-height + BOUNCING_DELTA
       $scope.show-more!
+

@@ -1,11 +1,18 @@
 .header(ng-controller='NavbarCtrl')
-  ul.nav.nav-pills.pull-right
-    li(ng-repeat='item in menu', ng-class='{active: isActive(item.link)}')
-      a(ng-href='{{item.link}}') {{item.title}}
-    li(ng-hide='currentUser', ng-class='{active: isActive("/login")}')
-      a(href='/login') 登录
-    li(ng-hide='currentUser', ng-class='{active: isActive("/signup")}')
-      a(href='/signup') 注册
-    li(ng-show='currentUser', ng-class='{active: isActive("/logout")}')
-      a(href='', ng-click='logout()') 退出
-  h3.text-muted 12307
+  nav.navbar.navbar-fixed-top
+    div.nav-style
+      ul.navbar.navbar-nav.navbar-inverse.navbar-right
+        li(ng-repeat='item in menu', ng-class='{active: isActive(item.link)}')
+           p.navbar-text.navbar-left
+              a(ng-href='{{item.link}}') 
+                {{item.title}}
+        li(ng-hide='currentUser', ng-class='{active: isActive("/login")}')
+          p.navbar-text.navbar-left
+            a(href='/login') 登录
+        li(ng-hide='currentUser', ng-class='{active: isActive("/signup")}')
+          p.navbar-text.navbar-left
+            a(href='/signup') 注册
+        li(ng-show='currentUser', ng-class='{active: isActive("/logout")}')
+           p.navbar-text.navbar-left
+            a(href='', ng-click='logout()') 退出
+  

@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('12307App')
-  .controller 'LoginCtrl', ($scope, $location, Auth) ->
+  .controller 'LoginCtrl', ($scope, $location, Auth ) ->
     $scope.user = {}
     $scope.errors = {}
 
@@ -19,3 +19,4 @@ angular.module('12307App')
         .catch (err) ->
           err = err.data;
           $scope.errors.other = err.message;
+    

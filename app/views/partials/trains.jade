@@ -29,41 +29,46 @@ div(ng-include='\'partials/navbar.html\'')
       .ui.blue.submit.button(ng-click='query()') 查询
 
   .ui.horizontal.divider 结果
+  div.ui.top.attached.tabular.menu
+    a.active.item 1234
+    a.item(ng-repeat = "item in dateListItems"){{item}}
+    
+       
+  div.ui.bottom.attached.segment
+    table.ui.table.small
+      thead
+        tr
+          th(ng-repeat="name in ['车次', '出发站/到达站', '出发时间/到达时间', '历时', '商务座', '特等座', '一等座', '二等座', '高级软卧', '软卧', '硬卧', '软座', '硬座', '无座', '其它', '操作']") {{name}}
 
-  table.ui.table.small
-    thead
-      tr
-        th(ng-repeat="name in ['车次', '出发站/到达站', '出发时间/到达时间', '历时', '商务座', '特等座', '一等座', '二等座', '高级软卧', '软卧', '硬卧', '软座', '硬座', '无座', '其它', '操作']") {{name}}
-
-    tbody
-      tr(ng-repeat="train in trains", ng-click='showTrainInfo($event)')
-        td {{ train['车次'] }}
-          .ui.small.modal
-            h3 {{ train['车次'] }}
-            .ui.three.column.grid
-              .column(ng-repeat="station in train['经停站']")
-                .ui.segment
-                  | {{ station['站名'] }}
-                  span.small {{ station['出发'] + ' ~ ' + station['到达'] }}
+      tbody
+        tr(ng-repeat="train in trains", ng-click='showTrainInfo($event)')
+          td {{ train['车次'] }}
+            .ui.small.modal
+              h3 {{ train['车次'] }}
+              .ui.three.column.grid
+                .column(ng-repeat="station in train['经停站']")
+                  .ui.segment
+                    | {{ station['站名'] }}
+                    span.small {{ station['出发'] + ' ~ ' + station['到达'] }}
                   
-        td {{ train.travelDeparture['站名'] + '/' + train.travelTerminal['站名'] }}
-        td {{ train.travelDeparture['出发'] + ' ~ ' + train.travelTerminal['到达'] }}
-        td {{ getTravelTime(train.travelDeparture, train.travelTerminal) }}
-        td {{ getRemainTickets(train, '商务座') | showRemaind }}
-        td {{ getRemainTickets(train, '特等座') | showRemaind }}
-        td {{ getRemainTickets(train, '一等座') | showRemaind }}
-        td {{ getRemainTickets(train, '二等座') | showRemaind }}
-        td {{ getRemainTickets(train, '高级软卧') | showRemaind }}
-        td {{ getRemainTickets(train, '软卧') | showRemaind }}
-        td {{ getRemainTickets(train, '硬卧') | showRemaind }}
-        td {{ getRemainTickets(train, '软座') | showRemaind }}
-        td {{ getRemainTickets(train, '硬座') | showRemaind }}
-        td {{ getRemainTickets(train, '无座') | showRemaind }}
-        td {{ getRemainTickets(train, '其它') | showRemaind }}
-        td 
-          a(href='/order', ng-click='book($event)', value="{{train['车次']}}") 订票
+          td {{ train.travelDeparture['站名'] + '/' + train.travelTerminal['站名'] }}
+          td {{ train.travelDeparture['出发'] + ' ~ ' + train.travelTerminal['到达'] }}
+          td {{ getTravelTime(train.travelDeparture, train.travelTerminal) }}
+          td {{ getRemainTickets(train, '商务座') | showRemaind }}
+          td {{ getRemainTickets(train, '特等座') | showRemaind }}
+          td {{ getRemainTickets(train, '一等座') | showRemaind }}
+          td {{ getRemainTickets(train, '二等座') | showRemaind }}
+          td {{ getRemainTickets(train, '高级软卧') | showRemaind }}
+          td {{ getRemainTickets(train, '软卧') | showRemaind }}
+          td {{ getRemainTickets(train, '硬卧') | showRemaind }}
+          td {{ getRemainTickets(train, '软座') | showRemaind }}
+          td {{ getRemainTickets(train, '硬座') | showRemaind }}
+          td {{ getRemainTickets(train, '无座') | showRemaind }}
+          td {{ getRemainTickets(train, '其它') | showRemaind }}
+          td 
+            a(href='/order', ng-click='book($event)', value="{{train['车次']}}") 订票
 
-  .ui.small.center(ng-click='showMore()')
-    | --- 还有{{unshownTrainsNumber}}次列车
-    i.icon.double.angle.down 
-    | ---
+    .ui.small.center(ng-click='showMore()')
+      | --- 还有{{unshownTrainsNumber}}次列车
+      i.icon.double.angle.down 
+      | ---
